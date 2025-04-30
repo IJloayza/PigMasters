@@ -19,9 +19,9 @@ public class AssetManager {
 
     public static void load() {
         // Fonts
-        boldFont = new BitmapFont(Gdx.files.internal("fonts/PixelHigh.ttf"));
-        mediumFont = new BitmapFont(Gdx.files.internal("fonts/PixelMiddle.ttf"));
-        smallFont = new BitmapFont(Gdx.files.internal("fonts/PixelSmall.ttf"));
+        boldFont = new BitmapFont(Gdx.files.internal("fonts/PixelHigh.fnt"));
+        mediumFont = new BitmapFont(Gdx.files.internal("fonts/PixelMiddle.fnt"));
+        smallFont = new BitmapFont(Gdx.files.internal("fonts/PixelSmall.fnt"));
 
         boldFont.getData().setScale(0.6f);
         mediumFont.getData().setScale(0.4f);
