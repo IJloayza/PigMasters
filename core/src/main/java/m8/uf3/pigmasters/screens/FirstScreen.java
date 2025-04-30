@@ -2,12 +2,20 @@ package m8.uf3.pigmasters.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import m8.uf3.pigmasters.MainGame;
@@ -25,6 +33,7 @@ public class FirstScreen implements Screen {
 
     private GlyphLayout textLayout;
     private GlyphLayout textDescription;
+    private TextButton playButton;
 
     public FirstScreen(MainGame game) {
         this.game = game;
@@ -45,6 +54,8 @@ public class FirstScreen implements Screen {
         batch = stage.getBatch();
 
         background = new Image(AssetManager.background);
+
+        loadBtn();
 
         stage.addActor(background);
     }
@@ -87,4 +98,35 @@ public class FirstScreen implements Screen {
 
     @Override
     public void dispose() {}
+
+    public void loadBtn() {
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = AssetManager.mediumFont;
+        buttonStyle.fontColor = Color.WHITE;
+        buttonStyle.overFontColor = Color.YELLOW;  // al pasar el mouse
+        buttonStyle.downFontColor = Color.GRAY;    // al presionar
+
+        // También puedes definir fondo con NinePatch o simple Drawable
+        Pixmap pixmap = new Pixmap(200, 50, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.DARK_GRAY);
+        pixmap.fill();
+        buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+
+        playButton = new TextButton("Play", buttonStyle);
+        playButton.setPosition(
+            Gdx.graphics.getWidth() / 2f - playButton.getWidth() / 2,
+            Gdx.graphics.getHeight() / 2f - playButton.getHeight() / 2
+        );
+
+        // Acción al hacer clic
+        playButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("¡Play pulsado!");
+                // Aquí puedes cambiar de screen o iniciar el juego
+            }
+        });
+
+        stage.addActor(playButton);
+    }
 }
