@@ -1,6 +1,7 @@
 package m8.uf3.pigmasters.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
@@ -35,6 +37,11 @@ public class FirstScreen implements Screen {
     private GlyphLayout textDescription;
     private TextButton playButton;
 
+
+    // Dimensiones
+    private final float screenWidth = Gdx.graphics.getWidth();
+    private final float screenHeight = Gdx.graphics.getHeight();
+
     public FirstScreen(MainGame game) {
         this.game = game;
 
@@ -44,20 +51,24 @@ public class FirstScreen implements Screen {
         textDescription = new GlyphLayout();
         textDescription.setText(AssetManager.mediumFont, "Aprendre el camino del cerdo");
 
-        camera = new OrthographicCamera(1024, 768);
-        camera.setToOrtho(false);
 
-        StretchViewport viewport = new StretchViewport(1024, 768, camera);
+
+        // Ajustando camara
+        camera = new OrthographicCamera(screenWidth, screenHeight);
+        camera.position.set(screenWidth / 2, screenHeight / 2, 0);
+        camera.update();
+        camera.setToOrtho(false);
+        StretchViewport viewport = new StretchViewport(screenWidth, screenHeight, camera);
 
         stage = new Stage(viewport);
-
-        batch = stage.getBatch();
+        Gdx.input.setInputProcessor(stage);
 
         background = new Image(AssetManager.background);
-
-        loadBtn();
+        background.setSize((float) (screenWidth*1.2), (float) (screenHeight*1.3));
+        background.setPosition(screenWidth / 2, screenHeight / 2 - 50, 0);
 
         stage.addActor(background);
+        loadBtn();
     }
 
     @Override
@@ -65,16 +76,19 @@ public class FirstScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         stage.draw();
         stage.act(delta);
 
-        batch.begin();
-        AssetManager.mediumFont.draw(batch, textLayout, 1024/2 - textLayout.width/3,
-            668);
+        stage.getBatch().begin();
+        AssetManager.mediumFont.draw(stage.getBatch(), textLayout, screenWidth/2 - textLayout.width/2,
+                Gdx.graphics.getHeight()*0.75f);
 
-        AssetManager.mediumFont.draw(batch, textDescription, 1024/2 - textLayout.width/5,
-            668 - 100);
-        batch.end();
+        AssetManager.mediumFont.draw(stage.getBatch(), textDescription, screenWidth/2 - textDescription.width/2,
+                Gdx.graphics.getHeight()*0.75f - 100);
+        stage.getBatch().end();
 
         /*
         if (Gdx.input.isTouched()) {
@@ -85,7 +99,10 @@ public class FirstScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+        camera.update();
+    }
 
     @Override
     public void pause() {}
@@ -110,7 +127,7 @@ public class FirstScreen implements Screen {
         Pixmap pixmap = new Pixmap(200, 50, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.DARK_GRAY);
         pixmap.fill();
-        buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        buttonStyle.up = new TextureRegionDrawable(new Texture(pixmap));
 
         playButton = new TextButton("Play", buttonStyle);
         playButton.setPosition(
