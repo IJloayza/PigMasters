@@ -1,4 +1,4 @@
-package m8.uf3.pigmasters;
+package m8.uf3.pigmasters.screens;
 
 import com.badlogic.gdx.Screen;
 
