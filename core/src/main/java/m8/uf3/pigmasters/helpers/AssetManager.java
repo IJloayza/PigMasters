@@ -23,9 +23,9 @@ public class AssetManager {
         mediumFont = new BitmapFont(Gdx.files.internal("fonts/PixelMiddle.fnt"));
         smallFont = new BitmapFont(Gdx.files.internal("fonts/PixelSmall.fnt"));
 
-        boldFont.getData().setScale(0.6f);
-        mediumFont.getData().setScale(0.4f);
-        smallFont.getData().setScale(0.4f);
+        boldFont.getData().setScale(3f);
+        mediumFont.getData().setScale(2f);
+        smallFont.getData().setScale(1.3f);
 
         // Textures
         FileHandle fileBackground = Gdx.files.internal("img/backgroundPigMasters.png");
