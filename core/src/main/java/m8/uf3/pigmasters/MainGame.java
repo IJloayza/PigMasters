@@ -9,9 +9,13 @@ import m8.uf3.pigmasters.screens.FirstScreen;
 public class MainGame extends Game {
     @Override
     public void create() {
-
         AssetManager.load();
-        setScreen(new FirstScreen());
+        setScreen(new FirstScreen(this));
+    }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        AssetManager.dispose();
     }
 }
