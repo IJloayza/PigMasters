@@ -30,10 +30,10 @@ public class FirstScreen implements Screen {
         this.game = game;
 
         textLayout = new GlyphLayout();
-        textLayout.setText(AssetManager.font, "PigMasters");
+        textLayout.setText(AssetManager.mediumFont, "PigMasters");
 
         textDescription = new GlyphLayout();
-        textDescription.setText(AssetManager.font, "Aprendre el camino del cerdo");
+        textDescription.setText(AssetManager.mediumFont, "Aprendre el camino del cerdo");
 
         camera = new OrthographicCamera(1024, 768);
         camera.setToOrtho(false);
@@ -58,10 +58,10 @@ public class FirstScreen implements Screen {
         stage.act(delta);
 
         batch.begin();
-        AssetManager.font.draw(batch, textLayout, 1024 - textLayout.width/3,
+        AssetManager.mediumFont.draw(batch, textLayout, 1024 - textLayout.width/3,
             668);
 
-        AssetManager.font.draw(batch, textDescription, 1024 - textLayout.width/5,
+        AssetManager.mediumFont.draw(batch, textDescription, 1024 - textLayout.width/5,
             668 - 100);
         batch.end();
 

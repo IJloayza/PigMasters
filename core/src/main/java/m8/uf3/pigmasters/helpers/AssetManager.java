@@ -7,14 +7,41 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetManager {
-    public static TextureRegion background;
-    public static BitmapFont font;
 
-    public static void load(){
+
+    // Fonts
+    public static BitmapFont boldFont;
+    public static BitmapFont mediumFont;
+    public static BitmapFont smallFont;
+
+    // Textures
+    public static TextureRegion background;
+
+    public static void load() {
+        // Fonts
+        boldFont = new BitmapFont(Gdx.files.internal("fonts/PixelHigh.ttf"));
+        mediumFont = new BitmapFont(Gdx.files.internal("fonts/PixelMiddle.ttf"));
+        smallFont = new BitmapFont(Gdx.files.internal("fonts/PixelSmall.ttf"));
+
+        boldFont.getData().setScale(0.6f);
+        mediumFont.getData().setScale(0.4f);
+        smallFont.getData().setScale(0.4f);
+
+        // Textures
         FileHandle fileBackground = Gdx.files.internal("img/backgroundPigMasters.png");
         Texture texture = new Texture(fileBackground);
 
         // Crear el TextureRegion a partir de esa textura
         background = new TextureRegion(texture);
+
+        // Sounds TODO
+
     }
+
+    public static void dispose() {
+        boldFont.dispose();
+        mediumFont.dispose();
+        smallFont.dispose();
+    }
+
 }
