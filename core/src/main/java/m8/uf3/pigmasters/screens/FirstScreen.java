@@ -69,10 +69,10 @@ public class FirstScreen implements Screen {
         stage.act(delta);
 
         batch.begin();
-        AssetManager.mediumFont.draw(batch, textLayout, 1024 - textLayout.width/3,
+        AssetManager.mediumFont.draw(batch, textLayout, 1024/2 - textLayout.width/3,
             668);
 
-        AssetManager.mediumFont.draw(batch, textDescription, 1024 - textLayout.width/5,
+        AssetManager.mediumFont.draw(batch, textDescription, 1024/2 - textLayout.width/5,
             668 - 100);
         batch.end();
 
