@@ -33,7 +33,7 @@ public class FirstScreen implements Screen {
         textLayout.setText(AssetManager.mediumFont, "PigMasters");
 
         textDescription = new GlyphLayout();
-        textDescription.setText(AssetManager.mediumFont, "Aprendre el camino del cerdo");
+        textDescription.setText(AssetManager.mediumFont, "Aprendre el camí del porc");
 
         camera = new OrthographicCamera(1024, 768);
         camera.setToOrtho(false);
