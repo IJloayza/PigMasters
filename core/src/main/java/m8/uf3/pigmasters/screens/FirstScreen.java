@@ -51,8 +51,6 @@ public class FirstScreen implements Screen {
         textDescription = new GlyphLayout();
         textDescription.setText(AssetManager.mediumFont, "Aprendre el camino del cerdo");
 
-
-
         // Ajustando camara
         camera = new OrthographicCamera(screenWidth, screenHeight);
         camera.position.set(screenWidth / 2, screenHeight / 2, 0);
@@ -90,12 +88,10 @@ public class FirstScreen implements Screen {
                 Gdx.graphics.getHeight()*0.75f - 100);
         stage.getBatch().end();
 
-        /*
         if (Gdx.input.isTouched()) {
-            game.setScreen(new MainScreen(game, batch, camera));
+            game.setScreen(new MainScreen());
             dispose();
         }
-        */
     }
 
     @Override
