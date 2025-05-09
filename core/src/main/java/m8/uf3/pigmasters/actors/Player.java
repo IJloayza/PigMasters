@@ -41,14 +41,9 @@ public class Player extends Actor {
 
     public TextureRegion getPlayerTexture() {
         switch (status) {
-            case PLAYER_RESTING : {
-                if (number == PLAYER_1) return AssetManager.whiteStand[0];
-                else return AssetManager.blackStand[0];
-
-            }
             case PLAYER_AIMING : {
-                if (number == PLAYER_1) return AssetManager.whiteShootU[0];
-                else return AssetManager.blackShootU[0];
+                if (number == PLAYER_1) return AssetManager.whiteShootU;
+                else return AssetManager.blackShootU;
             }
             case PLAYER_HIT : {
                 if (number == PLAYER_1) return AssetManager.whiteHurt;
@@ -56,7 +51,7 @@ public class Player extends Actor {
             }
             default : {
                 if (number == PLAYER_1) return AssetManager.whiteStand[0];
-                else return AssetManager.blackStand[0];
+                else return AssetManager.blackStand;
             }
         }
     }

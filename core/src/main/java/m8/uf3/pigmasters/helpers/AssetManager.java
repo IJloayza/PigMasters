@@ -22,15 +22,15 @@ public class AssetManager {
     public static TextureRegion[] whiteDraw;
     public static TextureRegion[] whiteShootF;
     public static TextureRegion[] whiteShootD;
-    public static TextureRegion[] whiteShootU;
+    public static TextureRegion whiteShootU;
     public static TextureRegion whiteHurt;
     public static TextureRegion whiteDown;
 
-    public static TextureRegion[] blackStand;
+    public static TextureRegion blackStand;
     public static TextureRegion[] blackDraw;
     public static TextureRegion[] blackShootF;
     public static TextureRegion[] blackShootD;
-    public static TextureRegion[] blackShootU;
+    public static TextureRegion blackShootU;
     public static TextureRegion blackHurt;
     public static TextureRegion blackDown;
 
@@ -42,15 +42,16 @@ public class AssetManager {
         whiteDraw = extractFrames(1, 128 + 12, 4, false);
         whiteShootF = extractFrames(1, 192 + 12, 6, false);
         whiteShootD = extractFrames(1, 256 + 12, 5, false);
-        whiteShootU = extractFrames(1, 320 + 12, 5, false);
+        whiteShootU = new TextureRegion(spritesheet, 1, 652, 121, 116);
         whiteHurt = new TextureRegion(spritesheet, 0, 384, 64, 64);
         whiteDown = new TextureRegion(spritesheet, 64, 384, 64, 64);
 
-        blackStand = extractFrames(0, 448, 4, true);
+        blackStand = new TextureRegion(spritesheet, 1, 888, 121, 116);
+        blackStand.flip(true, false);
         blackDraw = extractFrames(0, 576, 4, true);
         blackShootF = extractFrames(0, 640, 6, true);
         blackShootD = extractFrames(0, 704, 5, true);
-        blackShootU = extractFrames(0, 768, 5, true);
+        blackShootU = new TextureRegion(spritesheet, 1, 1548, 121, 116);
         blackHurt = new TextureRegion(spritesheet, 0, 832, 64, 64);
         blackHurt.flip(true, false);
         blackDown = new TextureRegion(spritesheet, 64, 832, 64, 64);
