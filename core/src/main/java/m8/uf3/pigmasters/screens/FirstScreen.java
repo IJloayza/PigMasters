@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import m8.uf3.pigmasters.MainGame;
 import m8.uf3.pigmasters.helpers.AssetManager;
+import m8.uf3.pigmasters.utils.Settings;
 
 public class FirstScreen implements Screen {
 
@@ -64,6 +65,9 @@ public class FirstScreen implements Screen {
 
         stage.addActor(background);
         loadBtn();
+
+        // Play lobby music
+        AssetManager.waitMusic.play();
     }
 
     @Override
@@ -124,8 +128,8 @@ public class FirstScreen implements Screen {
 
         playButton = new TextButton("Play", buttonStyle);
         playButton.setPosition(
-            Gdx.graphics.getWidth() / 2f - playButton.getWidth() / 2,
-            Gdx.graphics.getHeight() / 2f - playButton.getHeight() / 2
+            Settings.GAME_WIDTH / 2f - playButton.getWidth() / 2,
+            Settings.GAME_HEIGHT / 2f - playButton.getHeight() / 2
         );
 
         // Acción al hacer clic

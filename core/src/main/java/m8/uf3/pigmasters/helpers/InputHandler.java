@@ -40,6 +40,8 @@ public class InputHandler implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         switch (screen.getCurrentState()) {
             case 0 :
+                AssetManager.waitMusic.stop();
+                AssetManager.battleMusic.play();
                 screen.setCurrentState(1);
                 break;
             case 1 :
@@ -47,6 +49,8 @@ public class InputHandler implements InputProcessor {
                 screen.setCurrentState(2);
                 break;
             case 2 :
+                AssetManager.battleMusic.stop();
+                AssetManager.waitMusic.play();
                 screen.reset();
                 break;
             default:
