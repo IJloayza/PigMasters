@@ -16,8 +16,46 @@ public class AssetManager {
 
     // Textures
     public static TextureRegion background;
+    public static Texture spritesheet;
+
+    public static TextureRegion[] whiteStand;
+    public static TextureRegion[] whiteDraw;
+    public static TextureRegion[] whiteShootF;
+    public static TextureRegion[] whiteShootD;
+    public static TextureRegion[] whiteShootU;
+    public static TextureRegion whiteHurt;
+    public static TextureRegion whiteDown;
+
+    public static TextureRegion[] blackStand;
+    public static TextureRegion[] blackDraw;
+    public static TextureRegion[] blackShootF;
+    public static TextureRegion[] blackShootD;
+    public static TextureRegion[] blackShootU;
+    public static TextureRegion blackHurt;
+    public static TextureRegion blackDown;
 
     public static void load() {
+        spritesheet = new Texture(Gdx.files.internal("img/sheet.png"));
+
+        //Extreure de 64 en 64 els Textures dels porcs nomec cal alçada de sprite
+        whiteStand = extractFrames(0, 0, 4, false);
+        whiteDraw = extractFrames(0, 128, 4, false);
+        whiteShootF = extractFrames(0, 192, 6, false);
+        whiteShootD = extractFrames(0, 256, 5, false);
+        whiteShootU = extractFrames(0, 320, 5, false);
+        whiteHurt = new TextureRegion(spritesheet, 0, 384, 64, 64);
+        whiteDown = new TextureRegion(spritesheet, 64, 384, 64, 64);
+
+        blackStand = extractFrames(0, 448, 4, true);
+        blackDraw = extractFrames(0, 576, 4, true);
+        blackShootF = extractFrames(0, 640, 6, true);
+        blackShootD = extractFrames(0, 704, 5, true);
+        blackShootU = extractFrames(0, 768, 5, true);
+        blackHurt = new TextureRegion(spritesheet, 0, 832, 64, 64);
+        blackHurt.flip(true, false);
+        blackDown = new TextureRegion(spritesheet, 64, 832, 64, 64);
+        blackDown.flip(true, false);
+
         // Fonts
         boldFont = new BitmapFont(Gdx.files.internal("fonts/PixelHigh.fnt"));
         mediumFont = new BitmapFont(Gdx.files.internal("fonts/PixelMiddle.fnt"));
@@ -27,21 +65,29 @@ public class AssetManager {
         mediumFont.getData().setScale(2f);
         smallFont.getData().setScale(1.3f);
 
-        // Textures
+        // Textures Background
         FileHandle fileBackground = Gdx.files.internal("img/backgroundPigMasters.png");
         Texture texture = new Texture(fileBackground);
 
         // Crear el TextureRegion a partir de esa textura
         background = new TextureRegion(texture);
+    }
 
-        // Sounds TODO
-
+    private static TextureRegion[] extractFrames(int x, int y, int count, boolean flipX) {
+        TextureRegion[] frames = new TextureRegion[count];
+        for (int i = 0; i < count; i++) {
+            TextureRegion frame = new TextureRegion(spritesheet, x + i * 64, y, 64, 64);
+            if (flipX) frame.flip(true, false);
+            frames[i] = frame;
+        }
+        return frames;
     }
 
     public static void dispose() {
         boldFont.dispose();
         mediumFont.dispose();
         smallFont.dispose();
+        spritesheet.dispose();
     }
 
 }
