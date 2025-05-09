@@ -1,6 +1,8 @@
 package m8.uf3.pigmasters.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -33,6 +35,25 @@ public class AssetManager {
     public static TextureRegion[] blackShootU;
     public static TextureRegion blackHurt;
     public static TextureRegion blackDown;
+
+    // Sounds
+    // White
+    public static Sound whiteDeathSound;
+    public static Sound whiteFailSond;
+    public static Sound whiteHurtSound;
+    public static Sound[] whiteTurnSounds;
+
+    // Black
+    public static Sound blackDeathSound;
+    public static Sound blackFailSound;
+    public static Sound blackHurtSound;
+    public static Sound[] blackTurnSounds;
+
+    // Background music: https://tallbeard.itch.io/music-loop-bundle
+    // Sketchbook 2024-11-07
+    // Sketchbook 2024-11-13
+    public static Music waitMusic;
+    public static Music battleMusic;
 
     public static void load() {
         spritesheet = new Texture(Gdx.files.internal("img/sheet.png"));
@@ -71,6 +92,9 @@ public class AssetManager {
 
         // Crear el TextureRegion a partir de esa textura
         background = new TextureRegion(texture);
+
+        // Crea sonidos
+        initSounds();
     }
 
     private static TextureRegion[] extractFrames(int x, int y, int count, boolean flipX) {
@@ -88,6 +112,57 @@ public class AssetManager {
         mediumFont.dispose();
         smallFont.dispose();
         spritesheet.dispose();
+        disposeSounds();
+    }
+
+    private static void initSounds() {
+        // White pig sounds
+        whiteDeathSound = Gdx.audio.newSound(Gdx.files.internal("sounds/white_death.ogg"));
+        whiteFailSond = Gdx.audio.newSound(Gdx.files.internal("sounds/white_fail.ogg"));
+        whiteHurtSound = Gdx.audio.newSound(Gdx.files.internal("sounds/white_hurt.ogg"));
+        whiteTurnSounds = new Sound[3];
+        whiteTurnSounds[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/white_turn_1.wav"));
+        whiteTurnSounds[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/white_turn_2.wav"));
+        whiteTurnSounds[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/white_turn_3.ogg"));
+
+
+        // Black pig sounds
+        blackDeathSound = Gdx.audio.newSound(Gdx.files.internal("sounds/black_death.ogg"));
+        blackFailSound = Gdx.audio.newSound(Gdx.files.internal("sounds/black_fail.ogg"));
+        blackHurtSound = Gdx.audio.newSound(Gdx.files.internal("sounds/black_hurt.ogg"));
+        blackTurnSounds = new Sound[2];
+        blackTurnSounds[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/black_turn_1.ogg"));
+        blackTurnSounds[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/black_turn_2.ogg"));
+
+        // Background music
+        waitMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/wait_music_1.ogg"));
+        battleMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/battle_music_1.ogg"));
+
+
+        // init volumes
+        waitMusic.setVolume(0.4f);
+        battleMusic.setVolume(0.2f);
+        waitMusic.setLooping(true);
+        battleMusic.setLooping(true);
+    }
+
+    public static void disposeSounds() {
+        whiteDeathSound.dispose();
+        whiteFailSond.dispose();
+        whiteHurtSound.dispose();
+        for (Sound sound : whiteTurnSounds) {
+            sound.dispose();
+        }
+
+        blackDeathSound.dispose();
+        blackFailSound.dispose();
+        blackHurtSound.dispose();
+        for (Sound sound : blackTurnSounds) {
+            sound.dispose();
+        }
+
+        waitMusic.dispose();
+        battleMusic.dispose();
     }
 
 }
