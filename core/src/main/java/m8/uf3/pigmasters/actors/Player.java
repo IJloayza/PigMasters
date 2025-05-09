@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import m8.uf3.pigmasters.helpers.AssetManager;
+
 public class Player extends Actor {
     // player status
     public static final int PLAYER_RESTING = 0;
@@ -22,7 +24,11 @@ public class Player extends Actor {
     private int status;
     private Rectangle collisionRect;
 
+    private int remaining_lives;
+
     public Player(float x, float y, int width, int height, int number) {
+        this.remaining_lives = 3;
+
         this.width = width;
         this.height = height;
         position = new Vector2(x, y);
@@ -35,21 +41,22 @@ public class Player extends Actor {
 
     public TextureRegion getPlayerTexture() {
         switch (status) {
-            case PLAYER_RESTING -> {
-                if (number == PLAYER_1) return null;
-                else return null;
+            case PLAYER_RESTING : {
+                if (number == PLAYER_1) return AssetManager.whiteStand[0];
+                else return AssetManager.blackStand[0];
 
             }
-            case PLAYER_AIMING -> {
-                if (number == PLAYER_1) return null;
-                else return null;
+            case PLAYER_AIMING : {
+                if (number == PLAYER_1) return AssetManager.whiteShootU[0];
+                else return AssetManager.blackShootU[0];
             }
-            case PLAYER_HIT -> {
-                if (number == PLAYER_1) return null;
-                else return null;
+            case PLAYER_HIT : {
+                if (number == PLAYER_1) return AssetManager.whiteHurt;
+                else return AssetManager.blackHurt;
             }
-            default -> {
-                return null;
+            default : {
+                if (number == PLAYER_1) return AssetManager.whiteStand[0];
+                else return AssetManager.blackStand[0];
             }
         }
     }

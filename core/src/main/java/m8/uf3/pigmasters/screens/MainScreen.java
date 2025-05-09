@@ -69,22 +69,22 @@ public class MainScreen implements Screen {
 
         player2 = new Player(Settings.PLAYER2_STARTX, Settings.PLAYER_STARTY, Settings.PLAYER_WIDTH,
             Settings.PLAYER_HEIGHT, 1);
-
+/*
         platform1 = new Platform(Settings.PLATFORM1_STARTX, Settings.PLATFORM_STARTY,
             Settings.PLATFORM_WIDTH, Settings.PLATFORM_HEIGHT);
 
         platform2 = new Platform(Settings.PLATFORM2_STARTX, Settings.PLATFORM_STARTY,
             Settings.PLATFORM_WIDTH, Settings.PLATFORM_HEIGHT);
-
+*/
         background = new Image(AssetManager.background);
         background.setSize((float) (screenWidth*1.2), (float) (screenHeight*1.3));
         background.setPosition(screenWidth / 2, screenHeight / 2 - 50, 0);
 
-        stage.addActor(platform1);
-        stage.addActor(platform2);
+        stage.addActor(background);
+        //stage.addActor(platform1);
+        //stage.addActor(platform2);
         stage.addActor(player1);
         stage.addActor(player2);
-        stage.addActor(background);
 
         Gdx.input.setInputProcessor(new InputHandler(this));
     }

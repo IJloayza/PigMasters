@@ -13,10 +13,10 @@ public class Settings {
     public static final int PLATFORM2_STARTX = 1;
     public static final int PLATFORM_STARTY = 0;
 
-    public static final int PLAYER_WIDTH = 1;
-    public static final int PLAYER_HEIGHT = 1;
+    public static final int PLAYER_WIDTH = 100;
+    public static final int PLAYER_HEIGHT = 100;
 
-    public static final int PLAYER1_STARTX = 1;
-    public static final int PLAYER2_STARTX = 1;
+    public static final int PLAYER1_STARTX = 250;
+    public static final int PLAYER2_STARTX = 500;
     public static final int PLAYER_STARTY = PLATFORM_STARTY + PLAYER_HEIGHT;
 }
