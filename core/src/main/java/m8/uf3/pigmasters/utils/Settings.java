@@ -16,7 +16,7 @@ public class Settings {
     public static final int PLAYER_WIDTH = 200;
     public static final int PLAYER_HEIGHT = 200;
 
-    public static final int PLAYER1_STARTX = 250;
-    public static final int PLAYER2_STARTX = 500;
+    public static final int PLAYER1_STARTX = GAME_WIDTH / 4;
+    public static final int PLAYER2_STARTX = (GAME_WIDTH / 3) * 2;
     public static final int PLAYER_STARTY = PLATFORM_STARTY + PLAYER_HEIGHT;
 }
