@@ -15,8 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import m8.uf3.pigmasters.MainGame;
+import m8.uf3.pigmasters.actors.Platform;
+import m8.uf3.pigmasters.actors.Player;
 import m8.uf3.pigmasters.helpers.AssetManager;
 import m8.uf3.pigmasters.helpers.InputHandler;
+import m8.uf3.pigmasters.utils.Settings;
 
 public class MainScreen implements Screen {
 
@@ -26,6 +29,8 @@ public class MainScreen implements Screen {
 
     private World world;
     private Image background;
+    private Player player1, player2;
+    private Platform platform1, platform2;
 
     private Stage stage;
     private Batch batch;
@@ -36,8 +41,8 @@ public class MainScreen implements Screen {
     private int currentState = -1;
 
     // Dimensiones
-    private final float screenWidth = Gdx.graphics.getWidth();
-    private final float screenHeight = Gdx.graphics.getHeight();
+    private final float screenWidth = Settings.GAME_WIDTH;
+    private final float screenHeight = Settings.GAME_HEIGHT;
 
     public MainScreen() {
         Vector2 gravedad = new Vector2(0, -9.8f);
@@ -59,11 +64,27 @@ public class MainScreen implements Screen {
 
         batch = stage.getBatch();
 
+        player1 = new Player(Settings.PLAYER1_STARTX, Settings.PLAYER_STARTY, Settings.PLAYER_WIDTH,
+            Settings.PLAYER_HEIGHT, 0);
+
+        player2 = new Player(Settings.PLAYER2_STARTX, Settings.PLAYER_STARTY, Settings.PLAYER_WIDTH,
+            Settings.PLAYER_HEIGHT, 1);
+/*
+        platform1 = new Platform(Settings.PLATFORM1_STARTX, Settings.PLATFORM_STARTY,
+            Settings.PLATFORM_WIDTH, Settings.PLATFORM_HEIGHT);
+
+        platform2 = new Platform(Settings.PLATFORM2_STARTX, Settings.PLATFORM_STARTY,
+            Settings.PLATFORM_WIDTH, Settings.PLATFORM_HEIGHT);
+*/
         background = new Image(AssetManager.background);
         background.setSize((float) (screenWidth*1.2), (float) (screenHeight*1.3));
         background.setPosition(screenWidth / 2, screenHeight / 2 - 50, 0);
 
         stage.addActor(background);
+        //stage.addActor(platform1);
+        //stage.addActor(platform2);
+        stage.addActor(player1);
+        stage.addActor(player2);
 
         Gdx.input.setInputProcessor(new InputHandler(this));
     }
@@ -118,7 +139,6 @@ public class MainScreen implements Screen {
 
     public void reset() {
         textLayout.setText(AssetManager.mediumFont, "Estas listo/a?");
-
         currentState = READY;
     }
 
