@@ -38,11 +38,11 @@ public class AssetManager {
         spritesheet = new Texture(Gdx.files.internal("img/sheet.png"));
 
         //Extreure de 64 en 64 els Textures dels porcs nomec cal alçada de sprite
-        whiteStand = extractFrames(0, 0, 4, false);
-        whiteDraw = extractFrames(0, 128, 4, false);
-        whiteShootF = extractFrames(0, 192, 6, false);
-        whiteShootD = extractFrames(0, 256, 5, false);
-        whiteShootU = extractFrames(0, 320, 5, false);
+        whiteStand = extractFrames(1, 12, 4, false);
+        whiteDraw = extractFrames(1, 128 + 12, 4, false);
+        whiteShootF = extractFrames(1, 192 + 12, 6, false);
+        whiteShootD = extractFrames(1, 256 + 12, 5, false);
+        whiteShootU = extractFrames(1, 320 + 12, 5, false);
         whiteHurt = new TextureRegion(spritesheet, 0, 384, 64, 64);
         whiteDown = new TextureRegion(spritesheet, 64, 384, 64, 64);
 
@@ -76,7 +76,7 @@ public class AssetManager {
     private static TextureRegion[] extractFrames(int x, int y, int count, boolean flipX) {
         TextureRegion[] frames = new TextureRegion[count];
         for (int i = 0; i < count; i++) {
-            TextureRegion frame = new TextureRegion(spritesheet, x + i * 64, y, 64, 64);
+            TextureRegion frame = new TextureRegion(spritesheet, x + i * 121, y, 121, 116);
             if (flipX) frame.flip(true, false);
             frames[i] = frame;
         }
